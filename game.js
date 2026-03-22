@@ -117,11 +117,23 @@ function getComparisonText(value, target, thresholds = { much: 2, similar: 0.1 }
   let muchSmaller, smaller, larger, muchLarger;
   
   switch (type) {
+    case 'size':
+      muchSmaller = 'Much Smaller';
+      smaller = 'Smaller';
+      larger = 'Bigger';
+      muchLarger = 'Much Bigger';
+      break;
     case 'age':
       muchSmaller = 'Much Younger';
       smaller = 'Younger';
       larger = 'Older';
       muchLarger = 'Much Older';
+      break;
+    case 'happiness':
+      muchSmaller = 'Much Unhappier';
+      smaller = 'Unhappier';
+      larger = 'Happier';
+      muchLarger = 'Much Happier';
       break;
     case 'gdp':
       muchSmaller = 'Much Poorer';
@@ -269,7 +281,7 @@ function updateHintCell(cell, guessedCountry, hintType) {
 
   switch (hintType) {
   case 'size':
-    text = getComparisonText(targetCountry.area, guessedCountry.area);
+    text = getComparisonText(targetCountry.area, guessedCountry.area, { much: 2, similar: 0.1 }, 'size');
     className = getComparisonClass(targetCountry.area, guessedCountry.area);
     break;
   case 'population':
@@ -289,7 +301,7 @@ function updateHintCell(cell, guessedCountry, hintType) {
     className = getComparisonClass(targetCountry.medianAge, guessedCountry.medianAge, { much: 1.2, similar: 0.15 });
     break;
   case 'happiness':
-    text = getComparisonText(targetCountry.happiness, guessedCountry.happiness, { much: 1.3, similar: 0.1 });
+    text = getComparisonText(targetCountry.happiness, guessedCountry.happiness, { much: 1.3, similar: 0.1 }, 'happiness');
     className = getComparisonClass(targetCountry.happiness, guessedCountry.happiness, { much: 1.3, similar: 0.1 });
     break;
   case 'position':
