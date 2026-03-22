@@ -19,6 +19,8 @@ const diceBtn = document.getElementById('dice-btn');
 const guessesContainer = document.getElementById('guesses-container');
 const hintCountEl = document.getElementById('hint-count');
 const attemptCountEl = document.getElementById('attempt-count');
+const scoreValueEl = document.getElementById('score-value');
+const finalScoreEl = document.getElementById('final-score');
 const gameOverEl = document.getElementById('game-over');
 const resultMessage = document.getElementById('result-message');
 const correctAnswer = document.getElementById('correct-answer');
@@ -374,6 +376,9 @@ function renderGuess(guessedCountry, showHints = true) {
 function updateUI() {
   hintCountEl.textContent = hintsRemaining;
   attemptCountEl.textContent = 7 - attempts;
+  const guessesLeft = Math.max(0, 7 - attempts);
+  const score = guessesLeft * Math.max(0, hintsRemaining);
+  scoreValueEl.textContent = score;
 }
 
 function endGame(won) {
@@ -408,6 +413,10 @@ function endGame(won) {
   if (gameMode === 'unlimited') {
     playAgainBtn.classList.remove('hidden');
   }
+
+  const guessesLeft = Math.max(0, 7 - attempts);
+  const finalScore = guessesLeft * Math.max(0, hintsRemaining);
+  finalScoreEl.textContent = finalScore;
 
   gameOverEl.classList.remove('hidden');
 }
