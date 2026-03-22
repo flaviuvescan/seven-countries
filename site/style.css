@@ -1,0 +1,391 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #121213;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  max-width: 987px;
+  width: 100%;
+}
+
+header {
+  text-align: center;
+  border-bottom: 1px solid #3a3a3c;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: #808080;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.game-modes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.mode-btn {
+  background-color: transparent;
+  color: #808080;
+  border: 1px solid #3a3a3c;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.mode-btn:hover {
+  border-color: #808080;
+}
+
+.mode-btn.active {
+  background-color: #538d4e;
+  color: white;
+  border-color: #538d4e;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+.hint-remaining, .attempts {
+  background-color: #2a2a2c;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+#hint-count {
+  font-weight: bold;
+  color: #f5793a;
+}
+
+#attempt-count {
+  font-weight: bold;
+  color: #538d4e;
+}
+
+.hint-categories {
+  background-color: #1a1a1c;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.hint-row {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(7, 1fr);
+  gap: 2px;
+  padding: 8px 4px;
+}
+
+.hint-row.header {
+  background-color: #2a2a2c;
+  font-size: 0.88rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hint-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  font-size: 0.94rem;
+  text-align: center;
+  background-color: #2a2a2c;
+  border-radius: 4px;
+  min-height: 50px;
+  word-break: break-word;
+}
+
+.hint-cell.country-name {
+  font-weight: 600;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.hint-cell.unrevealed {
+  color: #808080;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.hint-cell.unrevealed:hover {
+  background-color: #3a3a3c;
+}
+
+.hint-cell.much-smaller {
+  background-color: #b71c1c;
+}
+
+.hint-cell.smaller {
+  background-color: #e65100;
+}
+
+.hint-cell.similar {
+  background-color: #538d4e;
+}
+
+.hint-cell.larger {
+  background-color: #1565c0;
+}
+
+.hint-cell.much-larger {
+  background-color: #7b1fa2;
+}
+
+.hint-cell.correct {
+  background-color: #538d4e;
+}
+
+.hint-cell.direction {
+  font-size: 0.79rem;
+}
+
+.hint-cell.dir-n { background-color: #1565c0; }
+.hint-cell.dir-ne { background-color: #00838f; }
+.hint-cell.dir-e { background-color: #2e7d32; }
+.hint-cell.dir-se { background-color: #9e9d24; }
+.hint-cell.dir-s { background-color: #ef6c00; }
+.hint-cell.dir-sw { background-color: #d84315; }
+.hint-cell.dir-w { background-color: #c62828; }
+.hint-cell.dir-nw { background-color: #7b1fa2; }
+
+.input-section {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#submit-btn {
+  flex: 1;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #538d4e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#submit-btn:hover {
+  background-color: #457a42;
+}
+
+#submit-btn:disabled {
+  background-color: #3a3a3c;
+  cursor: not-allowed;
+}
+
+#dice-btn {
+  padding: 15px 20px;
+  font-size: 1.5rem;
+  background-color: #2a2a2c;
+  color: white;
+  border: 2px solid #3a3a3c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#dice-btn:hover {
+  border-color: #808080;
+  background-color: #3a3a3c;
+}
+
+#dice-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#country-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: 2px solid #3a3a3c;
+  background-color: #2a2a2c;
+  color: white;
+  border-radius: 8px;
+  outline: none;
+}
+
+#country-input:focus {
+  border-color: #538d4e;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #2a2a2c;
+  border: 1px solid #3a3a3c;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+}
+
+.suggestions.visible {
+  display: block;
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+  background-color: #3a3a3c;
+}
+
+.game-over {
+  text-align: center;
+  padding: 30px;
+  background-color: #2a2a2c;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.game-over.hidden {
+  display: none;
+}
+
+.game-over h2 {
+  margin-bottom: 10px;
+}
+
+.game-over h2.win {
+  color: #538d4e;
+}
+
+.game-over h2.lose {
+  color: #b71c1c;
+  font-size: 2rem;
+}
+
+.game-over .answer {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.game-over p {
+  color: #808080;
+  margin-bottom: 20px;
+}
+
+#play-again-btn {
+  background-color: #538d4e;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#play-again-btn.hidden {
+  display: none;
+}
+
+.stats {
+  background-color: #2a2a2c;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.stats.hidden {
+  display: none;
+}
+
+.stats h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: #808080;
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 987px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .hint-row {
+    grid-template-columns: 1.2fr repeat(7, 1fr);
+    gap: 1px;
+  }
+
+  .hint-cell {
+    font-size: 0.72rem;
+    padding: 4px 2px;
+    min-height: 40px;
+  }
+
+  .hint-row.header .hint-cell {
+    font-size: 0.62rem;
+  }
+}

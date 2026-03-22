@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seven Countries</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Seven Countries</h1>
+      <p class="subtitle">Guess the European country in 7 tries</p>
+    </header>
+
+    <div class="game-modes">
+      <button id="daily-btn" class="mode-btn active">Daily Challenge</button>
+      <button id="unlimited-btn" class="mode-btn">Unlimited</button>
+    </div>
+
+    <div class="game-info">
+      <div class="hint-remaining">
+        HINTS LEFT: <span id="hint-count">7</span>
+      </div>
+      <div class="attempts">
+        GUESSES LEFT: <span id="attempt-count">7</span>
+      </div>
+    </div>
+
+    <div class="hint-categories">
+      <div class="hint-row header">
+        <div class="hint-cell">Country</div>
+        <div class="hint-cell">Size</div>
+        <div class="hint-cell">Popu-<br>lation</div>
+        <div class="hint-cell">Population<br>Density</div>
+        <div class="hint-cell">GDP Per<br>Capita</div>
+        <div class="hint-cell">Age</div>
+        <div class="hint-cell">Hap-<br>piness</div>
+        <div class="hint-cell">Posi-<br>tion</div>
+      </div>
+      <div id="guesses-container"></div>
+    </div>
+
+  <div class="input-section">
+    <input type="text" id="country-input" placeholder="Enter country name..." autocomplete="off">
+    <div id="suggestions" class="suggestions"></div>
+    <div class="input-buttons">
+      <button id="submit-btn">Submit Guess</button>
+      <button id="dice-btn" title="Random country">🎲</button>
+    </div>
+  </div>
+
+    <div id="game-over" class="game-over hidden">
+      <h2 id="result-message"></h2>
+      <p id="correct-answer"></p>
+      <button id="play-again-btn" class="hidden">Play Again</button>
+    </div>
+
+    <div class="stats hidden" id="stats-panel">
+      <h3>Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value" id="games-played">0</span>
+          <span class="stat-label">Played</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="win-rate">0%</span>
+          <span class="stat-label">Win %</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="current-streak">0</span>
+          <span class="stat-label">Current Streak</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="max-streak">0</span>
+          <span class="stat-label">Max Streak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
