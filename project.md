@@ -60,3 +60,6 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 - Spin off a `Seven Capitals` version using `World+` rules (distance + yellow shared letters).
 - Add a `US States` version.
 - Register a domain for the project.
+- After each win or loss, add a `Learn more about <solution>` link that opens the relevant Wikipedia page (country/state/capital).
+- Add Light Mode and a Sleepy Mode (night light) while rebranding the current theme as Dark Mode.
+- Create a version for Jobs where you guess a specific job.
