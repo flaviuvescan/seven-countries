@@ -49,3 +49,14 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 - This project is best served as a static site.
 - Most future changes will happen in `site/game.js` for behavior and `site/style.css` for presentation.
 - The app is intentionally simple: there is no module system, build pipeline, or automated test setup yet.
+
+## Roadmap (Planned Improvements)
+
+- Improve mobile layout for vertical play.
+- Add scoring UI that shows `Guesses Left` and `Hints Left`.
+- Add a backend submission flow for scores plus a `World Results` screen that shows score distributions and the percentage of `Lucky Bastards` (first-try wins).
+- Add additional continents beyond Europe.
+- Create a harder `World+` mode that shows distance in km/miles and highlights shared letters in yellow.
+- Spin off a `Seven Capitals` version using `World+` rules (distance + yellow shared letters).
+- Add a `US States` version.
+- Register a domain for the project.
