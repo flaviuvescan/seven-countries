@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-  max-width: 987px;
+  max-width: 1080px;
   width: 100%;
 }
 
@@ -34,9 +34,63 @@ h1 {
 }
 
 .subtitle {
-  color: #808080;
-  font-size: 0.9rem;
+  color: #a0a0a0;
+  font-size: 0.95rem;
   margin-top: 5px;
+}
+
+.section-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d7dadc;
+  margin-bottom: 12px;
+}
+
+.version-picker {
+  margin-bottom: 18px;
+}
+
+.version-selector {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.version-card {
+  background: linear-gradient(180deg, #232325 0%, #1a1a1c 100%);
+  border: 1px solid #3a3a3c;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 92px;
+  padding: 14px;
+  text-align: left;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.version-card:hover {
+  border-color: #d7dadc;
+  transform: translateY(-1px);
+}
+
+.version-card.active {
+  border-color: #c9b458;
+  box-shadow: 0 0 0 1px rgba(201, 180, 88, 0.35);
+}
+
+.version-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.version-card-subtitle {
+  color: #a0a0a0;
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
 .game-modes {
@@ -70,11 +124,13 @@ h1 {
 .game-info {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 15px;
   font-size: 1.05rem;
 }
 
-.hint-remaining, .attempts {
+.hint-remaining,
+.attempts {
   background-color: #2a2a2c;
   padding: 8px 12px;
   border-radius: 4px;
@@ -99,7 +155,7 @@ h1 {
 
 .hint-row {
   display: grid;
-  grid-template-columns: 1.5fr repeat(7, 1fr);
+  grid-template-columns: 1.6fr repeat(7, minmax(0, 1fr));
   gap: 2px;
   padding: 8px 4px;
 }
@@ -117,7 +173,7 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 6px 4px;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   text-align: center;
   background-color: #2a2a2c;
   border-radius: 4px;
@@ -129,6 +185,16 @@ h1 {
   font-weight: 600;
   justify-content: flex-start;
   padding-left: 10px;
+  gap: 1px;
+  flex-wrap: wrap;
+}
+
+.guess-letter {
+  display: inline-block;
+}
+
+.guess-letter.partial-match {
+  color: #c9b458;
 }
 
 .hint-cell.unrevealed {
@@ -169,14 +235,20 @@ h1 {
   font-size: 0.79rem;
 }
 
-.hint-cell.dir-n { background-color: #1565c0; }
+.hint-cell.dir-n,
+.hint-cell.dir-u { background-color: #1565c0; }
 .hint-cell.dir-ne { background-color: #00838f; }
 .hint-cell.dir-e { background-color: #2e7d32; }
-.hint-cell.dir-se { background-color: #9e9d24; }
-.hint-cell.dir-s { background-color: #ef6c00; }
-.hint-cell.dir-sw { background-color: #d84315; }
+.hint-cell.dir-se,
+.hint-cell.dir-de { background-color: #9e9d24; }
+.hint-cell.dir-s,
+.hint-cell.dir-d { background-color: #ef6c00; }
+.hint-cell.dir-sw,
+.hint-cell.dir-dw { background-color: #d84315; }
 .hint-cell.dir-w { background-color: #c62828; }
-.hint-cell.dir-nw { background-color: #7b1fa2; }
+.hint-cell.dir-nw,
+.hint-cell.dir-uw { background-color: #7b1fa2; }
+.hint-cell.dir-ue { background-color: #00838f; }
 
 .input-section {
   position: relative;
@@ -213,7 +285,10 @@ h1 {
 
 #dice-btn {
   padding: 15px 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   background-color: #2a2a2c;
   color: white;
   border: 2px solid #3a3a3c;
@@ -305,7 +380,12 @@ h1 {
   font-size: 1.8rem;
   font-weight: bold;
   color: #ffffff;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+}
+
+.answer-detail {
+  color: #cfcfcf;
+  font-size: 0.95rem;
 }
 
 .game-over p {
@@ -369,23 +449,53 @@ h1 {
   display: none !important;
 }
 
-@media (max-width: 987px) {
+@media (max-width: 1000px) {
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
+  }
+
+  .version-selector {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hint-row {
-    grid-template-columns: 1.2fr repeat(7, 1fr);
+    grid-template-columns: 1.3fr repeat(7, minmax(0, 1fr));
     gap: 1px;
   }
 
   .hint-cell {
     font-size: 0.72rem;
     padding: 4px 2px;
-    min-height: 40px;
+    min-height: 42px;
   }
 
   .hint-row.header .hint-cell {
     font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 12px;
+  }
+
+  .version-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .game-info {
+    flex-direction: column;
+  }
+
+  .hint-categories {
+    overflow-x: auto;
+  }
+
+  .hint-row {
+    min-width: 760px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
