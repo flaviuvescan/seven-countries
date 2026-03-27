@@ -241,8 +241,11 @@ h1 {
 .hint-cell.dir-ue { background-color: #00838f; }
 
 .input-section {
-  position: relative;
   margin-bottom: 20px;
+}
+
+.input-wrapper {
+  position: relative;
 }
 
 .input-buttons {

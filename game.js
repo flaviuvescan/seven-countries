@@ -179,7 +179,8 @@ function getCurrentColumns() {
 }
 
 function getGridTemplateColumns() {
-  return `1.6fr repeat(${Math.max(getCurrentColumns().length - 1, 1)}, minmax(0, 1fr))`;
+  const nameColumnWidth = currentVersion.id === 'capitals' ? '2.1fr' : '1.6fr';
+  return `${nameColumnWidth} repeat(${Math.max(getCurrentColumns().length - 1, 1)}, minmax(0, 1fr))`;
 }
 
 function renderVersionSelector() {
@@ -439,7 +440,22 @@ function getTableDirection(guess, target) {
 }
 
 function getEntryByName(name) {
-  return entries.find((entry) => entry.name.toLowerCase() === name.toLowerCase().trim());
+  const normalizedName = name.toLowerCase().trim();
+  return entries.find((entry) => {
+    return entry.name.toLowerCase() === normalizedName || getDisplayName(entry).toLowerCase() === normalizedName;
+  });
+}
+
+function getDisplayName(entry) {
+  if (currentVersion.id === 'capitals' && entry.country) {
+    return `${entry.name} (${entry.country})`;
+  }
+
+  return entry.name;
+}
+
+function getDisplayLabel(entry) {
+  return getDisplayName(entry);
 }
 
 function showSuggestions(query) {
@@ -449,7 +465,10 @@ function showSuggestions(query) {
   }
 
   const filtered = entries
-    .filter((entry) => entry.name.toLowerCase().includes(query.toLowerCase()))
+    .filter((entry) => {
+      const normalizedQuery = query.toLowerCase();
+      return entry.name.toLowerCase().includes(normalizedQuery) || getDisplayName(entry).toLowerCase().includes(normalizedQuery);
+    })
     .filter((entry) => !guesses.some((guess) => guess.toLowerCase() === entry.name.toLowerCase()))
     .slice(0, 6);
 
@@ -459,13 +478,14 @@ function showSuggestions(query) {
   }
 
   suggestions.innerHTML = filtered.map((entry) => `
-    <div class="suggestion-item" data-name="${entry.name}">${entry.name}</div>
+    <div class="suggestion-item" data-name="${entry.name}">${getDisplayLabel(entry)}</div>
   `).join('');
   suggestions.classList.add('visible');
 
   suggestions.querySelectorAll('.suggestion-item').forEach((item) => {
     item.addEventListener('click', () => {
-      input.value = item.dataset.name;
+      const selectedEntry = getEntryByName(item.dataset.name);
+      input.value = selectedEntry ? getDisplayName(selectedEntry) : item.dataset.name;
       suggestions.classList.remove('visible');
     });
   });
@@ -681,7 +701,7 @@ function renderGuess(guessedEntry, showHints = true) {
 
   const nameCell = document.createElement('div');
   nameCell.className = 'hint-cell country-name';
-  nameCell.textContent = guessedEntry.name;
+  nameCell.innerHTML = getDisplayLabel(guessedEntry);
   row.appendChild(nameCell);
 
   let freeHintIndex = -1;
@@ -750,7 +770,7 @@ function endGame(won) {
   correctAnswer.innerHTML = `The answer was`;
   const answerDiv = document.createElement('div');
   answerDiv.className = 'answer';
-  answerDiv.textContent = targetEntry.name;
+  answerDiv.innerHTML = getDisplayLabel(targetEntry);
   correctAnswer.appendChild(answerDiv);
 
   if (typeof currentVersion.answerDetails === 'function') {
@@ -791,7 +811,7 @@ diceBtn.addEventListener('click', () => {
   }
 
   const randomEntry = availableEntries[Math.floor(Math.random() * availableEntries.length)];
-  input.value = randomEntry.name;
+  input.value = getDisplayName(randomEntry);
 });
 
 dailyBtn.addEventListener('click', () => {
