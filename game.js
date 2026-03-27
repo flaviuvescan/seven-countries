@@ -107,6 +107,29 @@ const VERSION_CONFIGS = {
       { key: 'position', label: 'Posi-<br>tion', type: 'tablePosition' }
     ],
     answerDetails: (item) => `${item.symbol} - Period ${item.period}, Group ${item.group}`
+  },
+  superheroes: {
+    id: 'superheroes',
+    title: 'Seven Superheroes',
+    homepageTitle: 'Superheroes',
+    subtitle: 'Guess the superhero in 7 tries',
+    dataFile: 'data/superheroes.json',
+    entityName: 'superhero',
+    inputPlaceholder: 'Enter superhero name...',
+    statsKey: 'sevenCountriesStats:superheroes',
+    dailySeedOffset: 67,
+    columns: [
+      { key: 'name', label: 'Hero', type: 'name' },
+      { key: 'debutYear', label: 'Debut<br>Year', type: 'debutYear' },
+      { key: 'popularityRank', label: 'Popularity<br>Rank', type: 'popularityRank' },
+      { key: 'heightCm', label: 'Height', type: 'heightCm' },
+      { key: 'weightKg', label: 'Weight', type: 'weightKg' },
+      { key: 'speed', label: 'Speed', type: 'speed' },
+      { key: 'strength', label: 'Strength', type: 'strength' },
+      { key: 'intelligence', label: 'Intel-<br>ligence', type: 'intelligence' },
+      { key: 'charisma', label: 'Cha-<br>risma', type: 'charisma' }
+    ],
+    answerDetails: (item) => item.publisher
   }
 };
 
@@ -155,6 +178,10 @@ function getCurrentColumns() {
   return currentVersion.columns;
 }
 
+function getGridTemplateColumns() {
+  return `1.6fr repeat(${Math.max(getCurrentColumns().length - 1, 1)}, minmax(0, 1fr))`;
+}
+
 function renderVersionSelector() {
   versionSelector.innerHTML = Object.values(VERSION_CONFIGS).map((version) => `
     <button class="version-card${version.id === versionId ? ' active' : ''}" data-version="${version.id}">
@@ -172,9 +199,11 @@ function renderHeader() {
   titleEl.textContent = currentVersion.title;
   subtitleEl.textContent = currentVersion.subtitle;
   input.placeholder = currentVersion.inputPlaceholder;
+  document.title = currentVersion.title;
 
   const row = document.createElement('div');
   row.className = 'hint-row header';
+  row.style.gridTemplateColumns = getGridTemplateColumns();
 
   getCurrentColumns().forEach((column) => {
     const cell = document.createElement('div');
@@ -367,6 +396,24 @@ function getComparisonText(value, target, thresholds = { much: 2, similar: 0.1 }
   return muchLarger;
 }
 
+function getAbsoluteComparisonClass(target, guess, thresholds = { much: 20, similar: 5 }) {
+  const diff = target - guess;
+  const absDiff = Math.abs(diff);
+
+  if (absDiff <= thresholds.similar) return 'similar';
+  if (diff < 0) return absDiff >= thresholds.much ? 'much-smaller' : 'smaller';
+  return absDiff >= thresholds.much ? 'much-larger' : 'larger';
+}
+
+function getAbsoluteComparisonText(target, guess, thresholds = { much: 20, similar: 5 }, labels) {
+  const diff = target - guess;
+  const absDiff = Math.abs(diff);
+
+  if (absDiff <= thresholds.similar) return 'Similar';
+  if (diff < 0) return absDiff >= thresholds.much ? labels.muchSmaller : labels.smaller;
+  return absDiff >= thresholds.much ? labels.muchLarger : labels.larger;
+}
+
 function buildDirection(latDiff, lngDiff) {
   let direction = '';
 
@@ -389,37 +436,6 @@ function getTableDirection(guess, target) {
   const verticalDiff = target.period === guess.period ? 0 : target.period - guess.period;
   const horizontalDiff = target.group === guess.group ? 0 : target.group - guess.group;
   return buildDirection(-verticalDiff, horizontalDiff).replace('N', 'U').replace('S', 'D');
-}
-
-function getNameLetterState(name, solution) {
-  const remaining = {};
-  const normalizedSolution = solution.toLowerCase();
-
-  for (const char of normalizedSolution) {
-    if (!/[a-z0-9]/.test(char)) continue;
-    remaining[char] = (remaining[char] || 0) + 1;
-  }
-
-  return Array.from(name).map((char) => {
-    const lower = char.toLowerCase();
-    if (!/[a-z0-9]/.test(lower)) {
-      return { char, match: false };
-    }
-
-    if (remaining[lower] > 0) {
-      remaining[lower] -= 1;
-      return { char, match: true };
-    }
-
-    return { char, match: false };
-  });
-}
-
-function renderHighlightedName(name, solution) {
-  return getNameLetterState(name, solution).map(({ char, match }) => {
-    const safeChar = char === ' ' ? '&nbsp;' : char;
-    return `<span class="guess-letter${match ? ' partial-match' : ''}">${safeChar}</span>`;
-  }).join('');
 }
 
 function getEntryByName(name) {
@@ -575,6 +591,68 @@ function updateHintCell(cell, guessedEntry, hintType) {
       text = getComparisonText(targetEntry.boilingPoint, guessedEntry.boilingPoint, { much: 1.5, similar: 0.08 }, 'temperature');
       className = getComparisonClass(targetEntry.boilingPoint, guessedEntry.boilingPoint, { much: 1.5, similar: 0.08 });
       break;
+    case 'debutYear':
+      text = getAbsoluteComparisonText(targetEntry.debutYear, guessedEntry.debutYear, { much: 20, similar: 3 }, {
+        muchSmaller: 'Much Earlier',
+        smaller: 'Earlier',
+        larger: 'Later',
+        muchLarger: 'Much Later'
+      });
+      className = getAbsoluteComparisonClass(targetEntry.debutYear, guessedEntry.debutYear, { much: 20, similar: 3 });
+      break;
+    case 'popularityRank':
+      text = getAbsoluteComparisonText(targetEntry.popularityRank, guessedEntry.popularityRank, { much: 8, similar: 1 }, {
+        muchSmaller: 'Much More Popular',
+        smaller: 'More Popular',
+        larger: 'Less Popular',
+        muchLarger: 'Much Less Popular'
+      });
+      className = getAbsoluteComparisonClass(guessedEntry.popularityRank, targetEntry.popularityRank, { much: 8, similar: 1 });
+      break;
+    case 'heightCm':
+      text = getComparisonText(targetEntry.heightCm, guessedEntry.heightCm, { much: 1.2, similar: 0.04 }, 'size');
+      className = getComparisonClass(targetEntry.heightCm, guessedEntry.heightCm, { much: 1.2, similar: 0.04 });
+      break;
+    case 'weightKg':
+      text = getComparisonText(targetEntry.weightKg, guessedEntry.weightKg, { much: 1.35, similar: 0.08 }, 'mass');
+      className = getComparisonClass(targetEntry.weightKg, guessedEntry.weightKg, { much: 1.35, similar: 0.08 });
+      break;
+    case 'speed':
+      text = getAbsoluteComparisonText(targetEntry.speed, guessedEntry.speed, { much: 25, similar: 8 }, {
+        muchSmaller: 'Much Slower',
+        smaller: 'Slower',
+        larger: 'Faster',
+        muchLarger: 'Much Faster'
+      });
+      className = getAbsoluteComparisonClass(targetEntry.speed, guessedEntry.speed, { much: 25, similar: 8 });
+      break;
+    case 'strength':
+      text = getAbsoluteComparisonText(targetEntry.strength, guessedEntry.strength, { much: 25, similar: 8 }, {
+        muchSmaller: 'Much Weaker',
+        smaller: 'Weaker',
+        larger: 'Stronger',
+        muchLarger: 'Much Stronger'
+      });
+      className = getAbsoluteComparisonClass(targetEntry.strength, guessedEntry.strength, { much: 25, similar: 8 });
+      break;
+    case 'intelligence':
+      text = getAbsoluteComparisonText(targetEntry.intelligence, guessedEntry.intelligence, { much: 20, similar: 6 }, {
+        muchSmaller: 'Much Lower',
+        smaller: 'Lower',
+        larger: 'Higher',
+        muchLarger: 'Much Higher'
+      });
+      className = getAbsoluteComparisonClass(targetEntry.intelligence, guessedEntry.intelligence, { much: 20, similar: 6 });
+      break;
+    case 'charisma':
+      text = getAbsoluteComparisonText(targetEntry.charisma, guessedEntry.charisma, { much: 20, similar: 6 }, {
+        muchSmaller: 'Much Less Charismatic',
+        smaller: 'Less Charismatic',
+        larger: 'More Charismatic',
+        muchLarger: 'Much More Charismatic'
+      });
+      className = getAbsoluteComparisonClass(targetEntry.charisma, guessedEntry.charisma, { much: 20, similar: 6 });
+      break;
     case 'geoPosition':
       setDirectionCell(cell, getGeoDirection(guessedEntry, targetEntry));
       return;
@@ -596,13 +674,14 @@ function renderGuess(guessedEntry, showHints = true) {
   const isFirstGuess = attempts === 1;
   const row = document.createElement('div');
   row.className = 'hint-row';
+  row.style.gridTemplateColumns = getGridTemplateColumns();
 
   const columns = getCurrentColumns();
   const hintColumns = columns.slice(1);
 
   const nameCell = document.createElement('div');
   nameCell.className = 'hint-cell country-name';
-  nameCell.innerHTML = renderHighlightedName(guessedEntry.name, targetEntry.name);
+  nameCell.textContent = guessedEntry.name;
   row.appendChild(nameCell);
 
   let freeHintIndex = -1;

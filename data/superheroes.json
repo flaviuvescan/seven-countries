@@ -1,0 +1,22 @@
+[
+  {"name":"Spider-Man","publisher":"Marvel","debutYear":1962,"popularityRank":1,"heightCm":178,"weightKg":76,"speed":82,"strength":72,"intelligence":90,"charisma":92},
+  {"name":"Batman","publisher":"DC","debutYear":1939,"popularityRank":2,"heightCm":188,"weightKg":95,"speed":55,"strength":48,"intelligence":98,"charisma":84},
+  {"name":"Superman","publisher":"DC","debutYear":1938,"popularityRank":3,"heightCm":191,"weightKg":107,"speed":100,"strength":100,"intelligence":83,"charisma":88},
+  {"name":"Iron Man","publisher":"Marvel","debutYear":1963,"popularityRank":4,"heightCm":185,"weightKg":102,"speed":78,"strength":85,"intelligence":99,"charisma":86},
+  {"name":"Wonder Woman","publisher":"DC","debutYear":1941,"popularityRank":5,"heightCm":183,"weightKg":75,"speed":88,"strength":96,"intelligence":82,"charisma":90},
+  {"name":"Captain America","publisher":"Marvel","debutYear":1941,"popularityRank":6,"heightCm":188,"weightKg":109,"speed":58,"strength":64,"intelligence":78,"charisma":87},
+  {"name":"Thor","publisher":"Marvel","debutYear":1962,"popularityRank":7,"heightCm":198,"weightKg":290,"speed":90,"strength":99,"intelligence":70,"charisma":81},
+  {"name":"Hulk","publisher":"Marvel","debutYear":1962,"popularityRank":8,"heightCm":244,"weightKg":635,"speed":72,"strength":100,"intelligence":62,"charisma":52},
+  {"name":"Wolverine","publisher":"Marvel","debutYear":1974,"popularityRank":9,"heightCm":160,"weightKg":136,"speed":52,"strength":66,"intelligence":74,"charisma":68},
+  {"name":"Flash","publisher":"DC","debutYear":1940,"popularityRank":10,"heightCm":180,"weightKg":81,"speed":100,"strength":46,"intelligence":79,"charisma":76},
+  {"name":"Black Panther","publisher":"Marvel","debutYear":1966,"popularityRank":11,"heightCm":183,"weightKg":91,"speed":68,"strength":70,"intelligence":92,"charisma":83},
+  {"name":"Captain Marvel","publisher":"Marvel","debutYear":1968,"popularityRank":12,"heightCm":180,"weightKg":75,"speed":95,"strength":94,"intelligence":80,"charisma":78},
+  {"name":"Green Lantern","publisher":"DC","debutYear":1940,"popularityRank":13,"heightCm":188,"weightKg":90,"speed":74,"strength":73,"intelligence":75,"charisma":72},
+  {"name":"Deadpool","publisher":"Marvel","debutYear":1991,"popularityRank":14,"heightCm":188,"weightKg":95,"speed":50,"strength":44,"intelligence":69,"charisma":88},
+  {"name":"Doctor Strange","publisher":"Marvel","debutYear":1963,"popularityRank":15,"heightCm":188,"weightKg":82,"speed":42,"strength":32,"intelligence":96,"charisma":74},
+  {"name":"Aquaman","publisher":"DC","debutYear":1941,"popularityRank":16,"heightCm":185,"weightKg":146,"speed":80,"strength":92,"intelligence":73,"charisma":71},
+  {"name":"Robin","publisher":"DC","debutYear":1940,"popularityRank":17,"heightCm":168,"weightKg":61,"speed":57,"strength":32,"intelligence":76,"charisma":73},
+  {"name":"Storm","publisher":"Marvel","debutYear":1975,"popularityRank":18,"heightCm":180,"weightKg":57,"speed":84,"strength":38,"intelligence":78,"charisma":85},
+  {"name":"Cyclops","publisher":"Marvel","debutYear":1963,"popularityRank":19,"heightCm":191,"weightKg":88,"speed":54,"strength":43,"intelligence":77,"charisma":69},
+  {"name":"Green Arrow","publisher":"DC","debutYear":1941,"popularityRank":20,"heightCm":180,"weightKg":88,"speed":46,"strength":34,"intelligence":72,"charisma":79}
+]

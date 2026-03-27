@@ -53,7 +53,7 @@ h1 {
 
 .version-selector {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
 }
 
@@ -185,16 +185,6 @@ h1 {
   font-weight: 600;
   justify-content: flex-start;
   padding-left: 10px;
-  gap: 1px;
-  flex-wrap: wrap;
-}
-
-.guess-letter {
-  display: inline-block;
-}
-
-.guess-letter.partial-match {
-  color: #c9b458;
 }
 
 .hint-cell.unrevealed {

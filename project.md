@@ -56,8 +56,8 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 - Add scoring UI that shows `Guesses Left` and `Hints Left`.
 - Add a backend submission flow for scores plus a `World Results` screen that shows score distributions and the percentage of `Lucky Bastards` (first-try wins).
 - Add additional continents beyond Europe.
-- Create a harder `World+` mode that shows distance in km/miles and highlights shared letters in yellow.
-- Spin off a `Seven Capitals` version using `World+` rules (distance + yellow shared letters).
+- Create a harder `World+` mode that shows distance in km/miles.
+- Spin off a `Seven Capitals` version using `World+` rules (distance).
 - Add a `US States` version.
 - Register a domain for the project.
 - After each win or loss, add a `Learn more about <solution>` link that opens the relevant Wikipedia page (country/state/capital).
