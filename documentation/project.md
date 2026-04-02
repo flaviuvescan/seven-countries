@@ -1,4 +1,4 @@
-# Seven Countries
+﻿# Seven Countries
 
 Seven Countries is a small browser game where the player tries to guess a hidden entry in 7 guesses. The homepage now lets players choose a version (Europe, US States, Asia, Capitals, or Chemical Elements). Each guess reveals comparison hints against the target based on the active version’s columns.
 
@@ -67,7 +67,7 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 
 - Improve mobile layout for vertical play.
 - Add scoring UI that shows `Guesses Left` and `Hints Left`.
-- Add a backend submission flow for scores plus a `World Results` screen that shows score distributions and the percentage of `Lucky Bastards` (first-try wins).
+- Add a backend submission flow for scores plus a `World Results` screen that shows (a) leaderboard rank for Today / This Week / This Month (e.g. "You are #540 for Today, #670 for this Week and #156 for this Month out of 15440 players") and (b) visual score distributions for Daily / Weekly / Monthly (0 -> max score; max is only achievable by cheating), with the player highlighted on each distribution.
 - Add additional continents beyond Asia/Europe and expand datasets.
 - Create a harder `World+` mode that shows distance in km/miles.
 - Register a domain for the project.
@@ -107,3 +107,5 @@ Seven Countries is a small browser game where the player tries to guess a hidden
   - Languages: speakers, writing system, family, age, countries, difficulty, word order
   - Chess Openings: ECO family, popularity, aggressiveness, theory depth, draw rate, side, pawn structure family
   - Mountains: elevation, prominence, continent, difficulty, death rate, first ascent year, latitude
+
+
