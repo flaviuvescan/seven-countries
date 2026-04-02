@@ -15,7 +15,7 @@ const VERSION_CONFIGS = {
       { key: 'name', label: 'Country', type: 'name' },
       { key: 'area', label: 'Size', type: 'area' },
       { key: 'population', label: 'Popu-<br>lation', type: 'population' },
-      { key: 'density', label: 'Population<br>Density', type: 'density', derived: true },
+      { key: 'corruption', label: 'Corrup-<br>tion', type: 'corruption' },
       { key: 'gdpPerCapita', label: 'GDP Per<br>Capita', type: 'gdpPerCapita' },
       { key: 'medianAge', label: 'Age', type: 'medianAge' },
       { key: 'happiness', label: 'Hap-<br>piness', type: 'happiness' },
@@ -57,7 +57,7 @@ const VERSION_CONFIGS = {
       { key: 'name', label: 'Country', type: 'name' },
       { key: 'area', label: 'Size', type: 'area' },
       { key: 'population', label: 'Popu-<br>lation', type: 'population' },
-      { key: 'density', label: 'Population<br>Density', type: 'density', derived: true },
+      { key: 'corruption', label: 'Corrup-<br>tion', type: 'corruption' },
       { key: 'gdpPerCapita', label: 'GDP Per<br>Capita', type: 'gdpPerCapita' },
       { key: 'medianAge', label: 'Age', type: 'medianAge' },
       { key: 'happiness', label: 'Hap-<br>piness', type: 'happiness' },
@@ -365,6 +365,12 @@ function getComparisonText(value, target, thresholds = { much: 2, similar: 0.1 }
       larger = 'Denser';
       muchLarger = 'Much Denser';
       break;
+    case 'corruption':
+      muchSmaller = 'Much Less Corrupt';
+      smaller = 'Less Corrupt';
+      larger = 'More Corrupt';
+      muchLarger = 'Much More Corrupt';
+      break;
     case 'altitude':
       muchSmaller = 'Much Lower';
       smaller = 'Lower';
@@ -570,6 +576,15 @@ function updateHintCell(cell, guessedEntry, hintType) {
     case 'density':
       text = getComparisonText(targetDensity, guessDensity, { much: 2, similar: 0.1 }, 'density');
       className = getComparisonClass(targetDensity, guessDensity);
+      break;
+    case 'corruption':
+      text = getAbsoluteComparisonText(targetEntry.corruption, guessedEntry.corruption, { much: 15, similar: 4 }, {
+        muchSmaller: 'Much Less Corrupt',
+        smaller: 'Less Corrupt',
+        larger: 'More Corrupt',
+        muchLarger: 'Much More Corrupt'
+      });
+      className = getAbsoluteComparisonClass(targetEntry.corruption, guessedEntry.corruption, { much: 15, similar: 4 });
       break;
     case 'gdpPerCapita':
       text = getComparisonText(targetEntry.gdpPerCapita, guessedEntry.gdpPerCapita, { much: 2, similar: 0.1 }, 'gdp');

@@ -2,15 +2,17 @@
 
 This file stores a condensed history of working sessions for the project.
 
-New instances should read this file first for session continuity, then read `project.md`.
+New instances should read this file first for session continuity, then read `project.md`, then check `data-gathering.md` for known data sources.
 `project.md` is the main project memory document: part design bible, part Kanban board, part caveats log, part nice-to-have list, part calendar, and part decisions/questions tracker.
 
 ## Handoff Workflow
 
 - Read `conversation.md` for recent session summaries, active context, and handoff notes.
 - Read `project.md` for the current product direction, roadmap, LLM suggestions, and ongoing decisions.
+- Read `data-gathering.md` for confirmed dataset sources and links.
 - Treat `project.md` as the source of truth for product intent and planned work.
 - Treat `conversation.md` as the condensed narrative of what happened across sessions.
+- Treat `data-gathering.md` as the source ledger for datasets and external references.
 
 ## Project Tone
 

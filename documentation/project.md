@@ -9,9 +9,9 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 - Later guesses reveal one free hint automatically, and the player can spend from a shared hint pool to uncover the rest.
 - The game tracks lifetime stats per version in browser storage: games played, win rate, current streak, and max streak.
 - Versions:
-  - Europe (countries with size, population, density, GDP per capita, age, happiness, and position)
+  - Europe (countries with size, population, corruption, GDP per capita, age, happiness, and position)
   - US States (same columns as Europe)
-  - Asia (same columns as Europe)
+  - Asia (countries with size, population, corruption, GDP per capita, age, happiness, and position)
   - Capitals (altitude instead of happiness)
   - Chemical Elements (symbol, atomic number, atomic mass, density, melting point, boiling point, table position)
 
@@ -27,6 +27,7 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 - `index.html` defines the page structure: header, version picker, mode switcher, hint grid, input area, game-over panel, and stats panel.
 - `style.css` contains the full visual system, including the dark theme, grid layout, responsive behavior, and color coding for hint states.
 - `game.js` contains all game state, version configuration, and behavior.
+- `documentation/` stores project memory and data-source tracking documents.
 - `data/european-countries.json` stores the Europe dataset and numeric attributes used for comparisons.
 - `data/us-states.json` stores the US States dataset.
 - `data/asia-countries.json` stores the Asia dataset.
@@ -60,6 +61,7 @@ Seven Countries is a small browser game where the player tries to guess a hidden
 - This project is best served as a static site.
 - Most future changes will happen in `game.js` for behavior and `style.css` for presentation.
 - The app is intentionally simple: there is no module system, build pipeline, or automated test setup yet.
+- Track dataset provenance in `documentation/data-gathering.md`.
 
 ## Roadmap (Planned Improvements)
 
